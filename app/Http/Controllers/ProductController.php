@@ -11,7 +11,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        echo "index";
     }
 
     /**
@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view("create");
     }
 
     /**
@@ -27,7 +27,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        echo "store";
     }
 
     /**
@@ -35,7 +35,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        echo "show : $id ";
     }
 
     /**
@@ -43,7 +43,7 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        echo "edit : $id ";
     }
 
     /**

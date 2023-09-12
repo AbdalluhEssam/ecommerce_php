@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductController;
 
 
 /*
@@ -26,3 +27,10 @@ Route::get("/typename", function(){
 Route::get("/client/login",[ClientController::class,"login"]);
 
 Route::get("/client/register",[ClientController::class ,"register"]);
+
+Route::get("products",[ProductController::class ,"index"]);
+Route::get("products/create",[ProductController::class ,"create"]);
+Route::post("products",[ProductController::class ,"store"]);
+Route::get("products/{id}",[ProductController::class ,"show"]);
+Route::get("products/{id}/edit",[ProductController::class ,"edit"]);
+// Route::get("products/{id}/delete",[ProductController::class ,"delete"]);
