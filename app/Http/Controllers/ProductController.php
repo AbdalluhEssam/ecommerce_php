@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -11,7 +12,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        echo "index";
+        $products = DB::table("product")->get()->toArray();
+        return view("view",compact("products"));
     }
 
     /**
@@ -27,7 +29,11 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        echo "store";
+        $name = $request->name;
+        Db::table("product")->insert([
+            "name" =>   $name
+        ]);
+        echo "inserted";
     }
 
     /**
@@ -35,7 +41,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        echo "show : $id ";
+        $products = DB::table("product")->where("id", $id)->first();
+        print_r($products);
     }
 
     /**
@@ -43,7 +50,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        echo "edit : $id ";
+        $products = DB::table("product")->where("id", $id)->first();
+        return view("edit",compact("products"));
     }
 
     /**
@@ -51,7 +59,11 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $name = $request->name;
+        DB::table("product")->where("id", $id)->update([
+            "name"=> $name
+        ]);
+        echo "Updated!";
     }
 
     /**
@@ -59,6 +71,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        DB::table("product")->where("id", $id)->delete();
+        echo "Delete!";
     }
 }

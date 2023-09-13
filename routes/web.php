@@ -20,17 +20,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get("/typename", function(){
-     return view( "details" );
-});
-
 Route::get("/client/login",[ClientController::class,"login"]);
 
 Route::get("/client/register",[ClientController::class ,"register"]);
 
-Route::get("products",[ProductController::class ,"index"]);
-Route::get("products/create",[ProductController::class ,"create"]);
-Route::post("products",[ProductController::class ,"store"]);
-Route::get("products/{id}",[ProductController::class ,"show"]);
-Route::get("products/{id}/edit",[ProductController::class ,"edit"]);
-// Route::get("products/{id}/delete",[ProductController::class ,"delete"]);
+// Route::get("products",[ProductController::class ,"index"]);
+// Route::get("products/create",[ProductController::class ,"create"]);
+// Route::post("products",[ProductController::class ,"store"]);
+// Route::get("products/{id}",[ProductController::class ,"show"]);
+// Route::get("products/{id}/edit",[ProductController::class ,"edit"]);
+// Route::put("products/{id}",[ProductController::class ,"update"]);
+// Route::delete("products/{id}",[ProductController::class ,"destroy"]);
+
+
+Route::resource("products",ProductController::class);
