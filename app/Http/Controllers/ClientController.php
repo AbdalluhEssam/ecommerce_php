@@ -1,15 +1,23 @@
-<?php 
+<?php
 namespace App\Http\Controllers;
+use App\Models\Client;
 
-class ClientController extends Controller{
+class ClientController extends Controller {
 
-    public function register(){
-        echo "Register";
+    
+    public function index() {
+        $clients = Client::get();
+        print_r($clients);
+
     }
 
-public function login(){
-    echo "Login";
-}
+    public function register() {
+        echo 'Register';
+    }
+
+    public function login() {
+        echo 'Login';
+    }
 
 }
 

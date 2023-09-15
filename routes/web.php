@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get("/client/login",[ClientController::class,"login"]);
 
 Route::get("/client/register",[ClientController::class ,"register"]);
+Route::get("/client",[ClientController::class ,"index"]);
 
 // Route::get("products",[ProductController::class ,"index"]);
 // Route::get("products/create",[ProductController::class ,"create"]);

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\Product;
+
 
 class ProductController extends Controller
 {
@@ -12,8 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = DB::table("product")->get()->toArray();
-        return view("view",compact("products"));
+        $products = Product::get();
+        return view("products.view",compact("products"));
     }
 
     /**
@@ -21,7 +23,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view("create");
+        return view("products.create");
     }
 
     /**
@@ -30,10 +32,11 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $name = $request->name;
-        Db::table("product")->insert([
+        Product::create([
             "name" =>   $name
         ]);
-        echo "inserted";
+
+        return redirect("/products");
     }
 
     /**
@@ -41,7 +44,7 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        $products = DB::table("product")->where("id", $id)->first();
+        $products =Product::where("id", $id)->first();
         print_r($products);
     }
 
@@ -50,8 +53,8 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        $products = DB::table("product")->where("id", $id)->first();
-        return view("edit",compact("products"));
+        $products = Product::where("id", $id)->first();
+        return view("products.edit",compact("products"));
     }
 
     /**
@@ -60,10 +63,11 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         $name = $request->name;
-        DB::table("product")->where("id", $id)->update([
+        Product::where("id", $id)->update([
             "name"=> $name
         ]);
-        echo "Updated!";
+        return redirect("/products");
+
     }
 
     /**
@@ -71,7 +75,7 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        DB::table("product")->where("id", $id)->delete();
+        Product::where("id", $id)->delete();
         echo "Delete!";
     }
 }
