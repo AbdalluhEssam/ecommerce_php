@@ -32,7 +32,6 @@ class TestImonialsController extends Controller
     public function store(Request $request)
     {
 
-
         $request->validate([
             'name' => 'required',
             'jop_title' => 'required',
@@ -44,7 +43,7 @@ class TestImonialsController extends Controller
         $testImonial = new TestImonial;
         $testImonial->name = $request->input('name');
         $testImonial->jop_title = trim($request->input('jop_title'));
-        $testImonial->description = bcrypt($request->input('description'));
+        $testImonial->description = trim($request->input('description'));
         $testImonial->image = $fileName;
         $testImonial->save();
 

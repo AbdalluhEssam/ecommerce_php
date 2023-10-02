@@ -12,14 +12,14 @@
 
     <!-- Bootstrap CSS -->
     <link href="{{ URL::asset('css/bootstrap.min.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ URL::asset('css/app.css') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="{{ URL::asset('css/fontawesome-free-6.4.2-web/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/tiny-slider.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/style.css') }}" rel="stylesheet" type="text/css">
     <title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
 </head>
 
 <body>
+
     <!-- Start Header/Navigation -->
     <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
 
@@ -44,9 +44,8 @@
                 </ul>
 
                 <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-            
-                    <li><a class="nav-link" href="#"><i class="fa-regular fa-user" style="color: #ffffff;"></i></a></li>
-                    <li><a class="nav-link" href="cart.html"><i class="fa-solid fa-cart-shopping"></i></i></a></li>
+                    <li><a class="nav-link" href="#"><img src="../../images/user.svg"></a></li>
+                    <li><a class="nav-link" href="cart.html"><img src="../../images/cart.svg"></a></li>
                 </ul>
             </div>
         </div>
@@ -314,9 +313,11 @@
                                             <blockquote class="mb-5">
                                                 <p>&ldquo;{{ $testImonial->description }}.&rdquo;</p>
                                             </blockquote>
+
                                             <div class="author-info">
                                                 <div class="author-pic">
-                                                    <img src="{{  asset('storage/images/'.$testImonial->image) }}" alt="{{ $testImonial->name }}" class="img-fluid">
+                                                    <img src="{{ asset('storage/images/'.$testImonial->image) }}" alt="Maria Jones"
+                                                        class="img-fluid">
                                                 </div>
                                                 <h3 class="font-weight-bold">{{ $testImonial->name }}</h3>
                                                 <span class="position d-block mb-3">{{ $testImonial->jop_title }}</span>
@@ -516,8 +517,6 @@
 
     <script src="../js/bootstrap.bundle.min.js"></script>
     <script src="../js/tiny-slider.js"></script>
-    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
-
     <script src="../js/custom.js"></script>
 </body>
 

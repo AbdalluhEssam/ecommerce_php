@@ -19,12 +19,6 @@ use App\Http\Controllers\TestImonialsController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get("/client/login",[ClientController::class,"login"]);
-
-Route::get("/client/register",[ClientController::class ,"register"]);
-Route::get("/client",[ClientController::class ,"index"]);
-
 // Route::get("products",[ProductController::class ,"index"]);
 // Route::get("products/create",[ProductController::class ,"create"]);
 // Route::post("products",[ProductController::class ,"store"]);
@@ -36,3 +30,4 @@ Route::get("/client",[ClientController::class ,"index"]);
 
 Route::resource("products",ProductController::class);
 Route::resource("testimonials",TestImonialsController::class);
+Route::resource("clients",ClientController::class);
