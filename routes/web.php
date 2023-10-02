@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TestImonialsController;
 
 
 /*
@@ -15,7 +16,6 @@ use App\Http\Controllers\ProductController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -35,3 +35,4 @@ Route::get("/client",[ClientController::class ,"index"]);
 
 
 Route::resource("products",ProductController::class);
+Route::resource("testimonials",TestImonialsController::class);

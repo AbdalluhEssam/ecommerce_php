@@ -14,8 +14,10 @@ class ProductController extends Controller
      */
     public function index()
     {
+        $titlePage = "All Product";
         $products = Product::get();
-        return view("products.view",compact("products"));
+        $pageLoading ="true";
+        return view("products.view",compact("products","titlePage","pageLoading"));
     }
 
     /**
