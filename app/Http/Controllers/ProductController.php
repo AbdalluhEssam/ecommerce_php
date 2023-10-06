@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Product;
+use App\Models\Brand;
+use App\Models\Categorie;
 
 
 class ProductController extends Controller
@@ -25,7 +26,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view("products.create");
+       $brands =  Brand::all();
+       $categories =  Categorie::all();
+       return view("products.create",compact("brands","categories"));
     }
 
     /**
@@ -33,21 +36,43 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $name = $request->name;
-        Product::create([
-            "name" =>   $name
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'count_in_stock' => 'required',
+            'category_id' => 'required',
+            'barnd_id' => 'required',
+            'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+        $fileName = time() . '.' . $request->image->extension();
+        $request->image->storeAs('public/images', $fileName);
+        $productModel = new Product;
+        $productModel->name = $request->input('name');
+        $productModel->price = $request->input('price');
+        $productModel->count_in_stock = $request->input('count_in_stock');
+        $productModel->category_id =$request->input('category_id');
+        $productModel->barnd_id = $request->input('barnd_id');
+        $productModel->description = $request->input('description');
+        $productModel->image = $fileName;
+        $productModel->save();
 
-        return redirect("/products");
+        return redirect('{{ route("products.view") }}')->with([
+            'message' => 'User added successfully!', 
+            'status' => 'success'
+        ]);
+     
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        $products =Product::where("id", $id)->first();
-        print_r($products);
+        $products = Product::get();
+        $pageLoading ="true";
+        return view("products.details",compact("products","pageLoading"));
     }
 
     /**
@@ -55,8 +80,10 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
+        $brands =  Brand::all();
+        $categories =  Categorie::all();
         $products = Product::where("id", $id)->first();
-        return view("products.edit",compact("products"));
+        return view("products.edit",compact("products","brands","categories"));
     }
 
     /**
@@ -64,11 +91,36 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'count_in_stock' => 'required',
+            'category_id' => 'required',
+            'barnd_id' => 'required',
+            'description' => 'required',
+        ]);
+        $fileName = time() . '.' . $request->image->extension();
+        $request->image->storeAs('public/images', $fileName);
+        $productModel = new Product;
+        $productModel->name = $request->input('name');
+        $productModel->price = $request->input('price');
+        $productModel->count_in_stock = $request->input('count_in_stock');
+        $productModel->category_id =$request->input('category_id');
+        $productModel->barnd_id = $request->input('barnd_id');
+        $productModel->description = $request->input('description');
+        $productModel->image = $fileName;
+
+       
         $name = $request->name;
         Product::where("id", $id)->update([
-            "name"=> $name
+            "name"=> $name,
+
         ]);
-        return redirect("/products");
+        return redirect('{{ route("products.view") }}')->with([
+            'message' => 'User added successfully!', 
+            'status' => 'success'
+        ]);
 
     }
 
